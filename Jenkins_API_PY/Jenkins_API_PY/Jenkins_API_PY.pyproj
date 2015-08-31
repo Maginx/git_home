@@ -35,7 +35,6 @@
     <Compile Include="main.py" />
     <Compile Include="prepare_configure.py" />
     <Compile Include="shell.py" />
-    <Compile Include="test.py" />
   </ItemGroup>
   <Import Condition="Exists($(PtvsTargetsFile))" Project="$(PtvsTargetsFile)" />
   <Import Condition="!Exists($(PtvsTargetsFile))" Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
