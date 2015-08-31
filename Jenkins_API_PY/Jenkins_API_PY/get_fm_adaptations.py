@@ -1,4 +1,4 @@
-# Modify jenkins setting and create man-jenkins for ADM feature.
+﻿# Modify jenkins setting and create man-jenkins for ADM feature.
 # @Author : Jeremy Wang(j60wang)
 # @Email : jeremy.wang@nokia.com
 # -*- coding: UTF-8 -*-
@@ -18,33 +18,38 @@ JOBS   = "jenkins-job"
 FAILED = "failed"
 
 def get_job_name(adaptation_release):
-  tmp = 'adaptations_trunk_' + adaptation_release +'_ris'
-  jenkins = Jenkins_Url(URL,USER,PASS)
-  if jenkins.job_exists(tmp):
-    return tmp
-  tmp = 'adaptation_trunk_' + adaptation_release +'_ris'
-  if jenkins.job_exists(tmp):
-    return tmp
-  if adaptation_release.__contains__("com.nsn."):
-    tmp = 'adaptations_trunk_' + adaptation_release.split('com.nsn.')[-1] +'_ris'
+    tmp = 'adaptations_trunk_' + adaptation_release +'_ris'
+    jenkins = Jenkins_Url(URL,USER,PASS)
     if jenkins.job_exists(tmp):
-      return tmp
-  if adaptation_release.__contains__("com.nokia."):
-    tmp = 'adaptations_trunk_' + adaptation_release.split('com.nokia.')[-1] +'_ris'
+        return tmp
+    tmp = 'adaptation_trunk_' + adaptation_release +'_ris'
     if jenkins.job_exists(tmp):
-      return tmp
-  if adaptation_release.__contains__("com.nokianetworks."):
-    tmp = 'adaptations_trunk_' + adaptation_release.split('com.nokianetworks.')[-1] +'_ris'
-    if jenkins.job_exists(tmp):
-      return tmp
-  print "Jenkins doesn't exist: " + tmp
-  return 0
+        return tmp
+    if adaptation_release.__contains__("com.nsn."):
+        tmp = 'adaptations_trunk_' + adaptation_release.split('com.nsn.')[-1] +'_ris'
+        if jenkins.job_exists(tmp):
+            return tmp
+    if adaptation_release.__contains__("com.nokia."):
+        tmp = 'adaptations_trunk_' + adaptation_release.split('com.nokia.')[-1] +'_ris'
+        if jenkins.job_exists(tmp):
+            return tmp
+    if adaptation_release.__contains__("com.nokianetworks."):
+        tmp = 'adaptations_trunk_' + adaptation_release.split('com.nokianetworks.')[-1] +'_ris'
+        if jenkins.job_exists(tmp):
+            return tmp
+    print "Jenkins doesn't exist: " + tmp
+    return 0
 
 def log(file_name,text):
-  now = datetime.datetime.now()
-  f=file(file_name,"a+")
-  f.writelines( text + "\n")
-  f.close()
+    now = datetime.datetime.now()
+    f=file(file_name,"a+")
+    try:
+        f.writelines( text + "\n")
+    except Exception,e:
+        print "Write file error " + e
+    finally:
+        f.close()
+   
 
 def get_release_urls(path):
   i = 1
