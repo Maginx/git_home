@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Jenkins_API_PY", "Jenkins_API_PY\Jenkins_API_PY.pyproj", "{33A459B7-D2EC-42C6-A799-9874D82B7EFF}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Component_Radiator", "..\Component_Radiator\Component_Radiator.pyproj", "{E98878A8-41B7-4ED1-9C48-259DDD6F3129}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,8 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{33A459B7-D2EC-42C6-A799-9874D82B7EFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{33A459B7-D2EC-42C6-A799-9874D82B7EFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E98878A8-41B7-4ED1-9C48-259DDD6F3129}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E98878A8-41B7-4ED1-9C48-259DDD6F3129}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
