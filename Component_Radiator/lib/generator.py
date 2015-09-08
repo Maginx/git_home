@@ -8,6 +8,7 @@ import csv
 import re
 import json
 import sys
+
 class JsonGenerator(object):
     def __init__(self, csvfile, component_width="10%"):
         self.component_width = int(component_width.rstrip("%"))
@@ -31,6 +32,7 @@ class JsonGenerator(object):
     def write_jobs(self, outfile):
         with open(outfile, 'w') as f:
             f.write('\n'.join(self.job_list))
+
     def _parse(self, csvfile):
         line_no = 0
         self.product_list = None
@@ -47,9 +49,6 @@ class JsonGenerator(object):
                         if row[i+1]:
                             self.job_list.append(re.search(r'.*job/(.*)',row[i+1].rstrip('/')).group(1))
                         
-                        
-
-        
     def _header(self):
         self.json.append({
         "header" : [{

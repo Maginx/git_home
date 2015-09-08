@@ -7,6 +7,8 @@ Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Jenkins_API_PY", "Jenkins_A
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Component_Radiator", "..\Component_Radiator\Component_Radiator.pyproj", "{E98878A8-41B7-4ED1-9C48-259DDD6F3129}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Serial_Port", "..\Serial_Port\Serial_Port.pyproj", "{73980688-0C45-4CB0-ADA4-BC5B93EC584A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,8 @@ Global
 		{33A459B7-D2EC-42C6-A799-9874D82B7EFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E98878A8-41B7-4ED1-9C48-259DDD6F3129}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E98878A8-41B7-4ED1-9C48-259DDD6F3129}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73980688-0C45-4CB0-ADA4-BC5B93EC584A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73980688-0C45-4CB0-ADA4-BC5B93EC584A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

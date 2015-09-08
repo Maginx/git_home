@@ -3,8 +3,6 @@
 '''
 main -- this tool is for generating  json file of radiator 
 
-
-
 @author:     Li, Joe (Nokia - CN/Chengdu)
 
 @copyright:  2015 organization_name. All rights reserved.
@@ -17,7 +15,7 @@ main -- this tool is for generating  json file of radiator
 
 import sys
 import os
-
+import T
 from argparse import ArgumentParser
 from argparse import RawDescriptionHelpFormatter
 from lib.generator import JsonGenerator
@@ -45,12 +43,10 @@ class CLIError(Exception):
 
 def main(argv=None): # IGNORE:C0111
     '''Command line options.'''
-
     if argv is None:
         argv = sys.argv
     else:
         sys.argv.extend(argv)
-
     program_name = os.path.basename(sys.argv[0])
     program_version = "v%s" % __version__
     program_build_date = str(__updated__)

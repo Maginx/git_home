@@ -3,23 +3,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>e98878a8-41b7-4ed1-9c48-259ddd6f3129</ProjectGuid>
+    <ProjectGuid>73980688-0c45-4cb0-ada4-bc5b93ec584a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Test.py</StartupFile>
+    <StartupFile>main.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
-    <Name>Component_Radiator</Name>
-    <RootNamespace>Component_Radiator</RootNamespace>
-    <IsWindowsApplication>True</IsWindowsApplication>
-    <InterpreterId>{2af0f10d-7135-4994-9156-5d01c9c11b7e}</InterpreterId>
-    <InterpreterVersion>2.7</InterpreterVersion>
-    <LaunchProvider>Standard Python launcher</LaunchProvider>
-    <InterpreterArguments>
-    </InterpreterArguments>
-    <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
-    <CommandLineArguments>-C lib/naruto.csv</CommandLineArguments>
+    <Name>Serial_Port</Name>
+    <RootNamespace>Serial_Port</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -29,27 +21,25 @@
     <DebugSymbols>true</DebugSymbols>
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="main.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="setting.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="log_access.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="serial_port.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="serial_port.ini" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="lib\generator.py" />
-    <Compile Include="lib\__init__.py" />
-    <Compile Include="main.py" />
-    <Compile Include="lib\T.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Test.py">
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="lib\" />
-  </ItemGroup>
-  <ItemGroup>
-    <InterpreterReference Include="{2af0f10d-7135-4994-9156-5d01c9c11b7e}\2.7" />
-  </ItemGroup>
   <Import Condition="Exists($(PtvsTargetsFile))" Project="$(PtvsTargetsFile)" />
   <Import Condition="!Exists($(PtvsTargetsFile))" Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
