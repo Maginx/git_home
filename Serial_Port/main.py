@@ -40,4 +40,5 @@ if __name__ == "__main__":
     while True:
         for port in enumerate(ports):
             port.read_lines()
-        sleep(1)
+        # sleep 5 millisecond
+        sleep(0.005)
