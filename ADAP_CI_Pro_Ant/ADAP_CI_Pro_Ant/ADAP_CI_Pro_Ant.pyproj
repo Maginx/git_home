@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>6d66b4db-b465-4279-83ff-33b3999eee00</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <ProjectTypeGuids>{789894c7-04a9-4a11-a6b5-3f4435165112};{1b580a1a-fdb3-4b32-83e1-6407eb2722e6};{349c5851-65df-11da-9384-00065b846f21};{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <StartupFile>runserver.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <LaunchProvider>Web launcher</LaunchProvider>
+    <OutputPath>.</OutputPath>
+    <StaticUriPattern>^/static/.*</StaticUriPattern>
+    <StaticUriRewrite>^/$(MSBuildProjectName)/static/.*</StaticUriRewrite>
+    <PythonWsgiHandler>$(MSBuildProjectName).app</PythonWsgiHandler>
+    <Name>ADAP_CI_Pro_Ant</Name>
+    <RootNamespace>ADAP_CI_Pro_Ant</RootNamespace>
+    <InterpreterId>{58ed4c6f-0ee8-4060-a929-2d219585ab39}</InterpreterId>
+    <InterpreterVersion>2.7</InterpreterVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="runserver.py" />
+    <Compile Include="ADAP_CI_Pro_Ant\__init__.py" />
+    <Compile Include="ADAP_CI_Pro_Ant\views.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ADAP_CI_Pro_Ant\" />
+    <Folder Include="ADAP_CI_Pro_Ant\static\" />
+    <Folder Include="ADAP_CI_Pro_Ant\static\content\" />
+    <Folder Include="ADAP_CI_Pro_Ant\static\fonts\" />
+    <Folder Include="ADAP_CI_Pro_Ant\static\scripts\" />
+    <Folder Include="ADAP_CI_Pro_Ant\templates\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="requirements.txt" />
+    <Content Include="ADAP_CI_Pro_Ant\static\content\bootstrap.css" />
+    <Content Include="ADAP_CI_Pro_Ant\static\content\bootstrap.min.css" />
+    <Content Include="ADAP_CI_Pro_Ant\static\content\site.css" />
+    <Content Include="ADAP_CI_Pro_Ant\static\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="ADAP_CI_Pro_Ant\static\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="ADAP_CI_Pro_Ant\static\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="ADAP_CI_Pro_Ant\static\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="ADAP_CI_Pro_Ant\static\scripts\bootstrap.js" />
+    <Content Include="ADAP_CI_Pro_Ant\static\scripts\bootstrap.min.js" />
+    <Content Include="ADAP_CI_Pro_Ant\static\scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="ADAP_CI_Pro_Ant\static\scripts\jquery-1.10.2.js" />
+    <Content Include="ADAP_CI_Pro_Ant\static\scripts\jquery-1.10.2.min.js" />
+    <Content Include="ADAP_CI_Pro_Ant\static\scripts\jquery-1.10.2.min.map" />
+    <Content Include="ADAP_CI_Pro_Ant\static\scripts\jquery.validate-vsdoc.js" />
+    <Content Include="ADAP_CI_Pro_Ant\static\scripts\jquery.validate.js" />
+    <Content Include="ADAP_CI_Pro_Ant\static\scripts\jquery.validate.min.js" />
+    <Content Include="ADAP_CI_Pro_Ant\static\scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="ADAP_CI_Pro_Ant\static\scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="ADAP_CI_Pro_Ant\static\scripts\modernizr-2.6.2.js" />
+    <Content Include="ADAP_CI_Pro_Ant\static\scripts\respond.js" />
+    <Content Include="ADAP_CI_Pro_Ant\static\scripts\respond.min.js" />
+    <Content Include="ADAP_CI_Pro_Ant\static\scripts\_references.js" />
+    <Content Include="ADAP_CI_Pro_Ant\templates\about.html" />
+    <Content Include="ADAP_CI_Pro_Ant\templates\contact.html" />
+    <Content Include="ADAP_CI_Pro_Ant\templates\index.html" />
+    <Content Include="ADAP_CI_Pro_Ant\templates\layout.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="..\..\..\Scripts\flasky\flasky_env\">
+      <Id>{58ed4c6f-0ee8-4060-a929-2d219585ab39}</Id>
+      <BaseInterpreter>{2af0f10d-7135-4994-9156-5d01c9c11b7e}</BaseInterpreter>
+      <Version>2.7</Version>
+      <Description>flasky_env (Python 2.7)</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <LibraryPath>Lib\</LibraryPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X86</Architecture>
+    </Interpreter>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Web.targets" />
+  <!-- Specify pre- and post-build commands in the BeforeBuild and 
+       AfterBuild targets below. -->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <AutoAssignPort>True</AutoAssignPort>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
