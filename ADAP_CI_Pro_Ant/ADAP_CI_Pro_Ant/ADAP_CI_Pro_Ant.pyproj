@@ -30,6 +30,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ADAP_CI_Pro_Ant\templates\bootstrap\nav.py" />
+    <Compile Include="ADAP_CI_Pro_Ant\templates\bootstrap\__init__.py" />
+    <Compile Include="hello.py" />
     <Compile Include="runserver.py" />
     <Compile Include="ADAP_CI_Pro_Ant\__init__.py" />
     <Compile Include="ADAP_CI_Pro_Ant\views.py" />
@@ -37,39 +40,44 @@
   <ItemGroup>
     <Folder Include="ADAP_CI_Pro_Ant\" />
     <Folder Include="ADAP_CI_Pro_Ant\static\" />
-    <Folder Include="ADAP_CI_Pro_Ant\static\content\" />
+    <Folder Include="ADAP_CI_Pro_Ant\static\css\" />
     <Folder Include="ADAP_CI_Pro_Ant\static\fonts\" />
-    <Folder Include="ADAP_CI_Pro_Ant\static\scripts\" />
+    <Folder Include="ADAP_CI_Pro_Ant\static\img\" />
+    <Folder Include="ADAP_CI_Pro_Ant\static\js\" />
     <Folder Include="ADAP_CI_Pro_Ant\templates\" />
+    <Folder Include="ADAP_CI_Pro_Ant\templates\bootstrap\" />
+    <Folder Include="ADAP_CI_Pro_Ant\templates\img\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="requirements.txt" />
-    <Content Include="ADAP_CI_Pro_Ant\static\content\bootstrap.css" />
-    <Content Include="ADAP_CI_Pro_Ant\static\content\bootstrap.min.css" />
-    <Content Include="ADAP_CI_Pro_Ant\static\content\site.css" />
+    <Content Include="ADAP_CI_Pro_Ant\static\css\bootstrap-theme.css" />
+    <Content Include="ADAP_CI_Pro_Ant\static\css\bootstrap-theme.css.map" />
+    <Content Include="ADAP_CI_Pro_Ant\static\css\bootstrap-theme.min.css" />
+    <Content Include="ADAP_CI_Pro_Ant\static\css\bootstrap.css" />
+    <Content Include="ADAP_CI_Pro_Ant\static\css\bootstrap.css.map" />
+    <Content Include="ADAP_CI_Pro_Ant\static\css\bootstrap.min.css" />
     <Content Include="ADAP_CI_Pro_Ant\static\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="ADAP_CI_Pro_Ant\static\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="ADAP_CI_Pro_Ant\static\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="ADAP_CI_Pro_Ant\static\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="ADAP_CI_Pro_Ant\static\scripts\bootstrap.js" />
-    <Content Include="ADAP_CI_Pro_Ant\static\scripts\bootstrap.min.js" />
-    <Content Include="ADAP_CI_Pro_Ant\static\scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="ADAP_CI_Pro_Ant\static\scripts\jquery-1.10.2.js" />
-    <Content Include="ADAP_CI_Pro_Ant\static\scripts\jquery-1.10.2.min.js" />
-    <Content Include="ADAP_CI_Pro_Ant\static\scripts\jquery-1.10.2.min.map" />
-    <Content Include="ADAP_CI_Pro_Ant\static\scripts\jquery.validate-vsdoc.js" />
-    <Content Include="ADAP_CI_Pro_Ant\static\scripts\jquery.validate.js" />
-    <Content Include="ADAP_CI_Pro_Ant\static\scripts\jquery.validate.min.js" />
-    <Content Include="ADAP_CI_Pro_Ant\static\scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="ADAP_CI_Pro_Ant\static\scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="ADAP_CI_Pro_Ant\static\scripts\modernizr-2.6.2.js" />
-    <Content Include="ADAP_CI_Pro_Ant\static\scripts\respond.js" />
-    <Content Include="ADAP_CI_Pro_Ant\static\scripts\respond.min.js" />
-    <Content Include="ADAP_CI_Pro_Ant\static\scripts\_references.js" />
-    <Content Include="ADAP_CI_Pro_Ant\templates\about.html" />
-    <Content Include="ADAP_CI_Pro_Ant\templates\contact.html" />
-    <Content Include="ADAP_CI_Pro_Ant\templates\index.html" />
-    <Content Include="ADAP_CI_Pro_Ant\templates\layout.html" />
+    <Content Include="ADAP_CI_Pro_Ant\static\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="ADAP_CI_Pro_Ant\static\img\favicon.ico" />
+    <Content Include="ADAP_CI_Pro_Ant\static\jquery.js" />
+    <Content Include="ADAP_CI_Pro_Ant\static\jquery.min.js" />
+    <Content Include="ADAP_CI_Pro_Ant\static\jquery.min.map" />
+    <Content Include="ADAP_CI_Pro_Ant\static\js\bootstrap.js" />
+    <Content Include="ADAP_CI_Pro_Ant\static\js\bootstrap.min.js" />
+    <Content Include="ADAP_CI_Pro_Ant\static\js\moment.js" />
+    <Content Include="ADAP_CI_Pro_Ant\static\js\npm.js" />
+    <Content Include="ADAP_CI_Pro_Ant\static\moment.js" />
+    <Content Include="ADAP_CI_Pro_Ant\templates\bootstrap\base.html" />
+    <Content Include="ADAP_CI_Pro_Ant\templates\bootstrap\favicon.ico" />
+    <Content Include="ADAP_CI_Pro_Ant\templates\bootstrap\fixes.html" />
+    <Content Include="ADAP_CI_Pro_Ant\templates\bootstrap\google.html" />
+    <Content Include="ADAP_CI_Pro_Ant\templates\bootstrap\pagination.html" />
+    <Content Include="ADAP_CI_Pro_Ant\templates\bootstrap\utils.html" />
+    <Content Include="ADAP_CI_Pro_Ant\templates\bootstrap\wtf.html" />
+    <Content Include="ADAP_CI_Pro_Ant\templates\img\favicon.ico" />
+    <Content Include="requirements.txt" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="..\..\..\Scripts\flasky\flasky_env\">
