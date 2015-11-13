@@ -1,9 +1,10 @@
-"""
+﻿"""
 This script runs the ADAP_CI_Pro_Ant application using a development server.
 """
 
 from os import environ
-from ADAP_CI_Pro_Ant import app
+from app import app
+from app import views
 
 if __name__ == '__main__':
     HOST = environ.get('SERVER_HOST', 'localhost')

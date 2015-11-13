@@ -18,7 +18,7 @@
     <PythonWsgiHandler>$(MSBuildProjectName).app</PythonWsgiHandler>
     <Name>ADAP_CI_Pro_Ant</Name>
     <RootNamespace>ADAP_CI_Pro_Ant</RootNamespace>
-    <InterpreterId>{58ed4c6f-0ee8-4060-a929-2d219585ab39}</InterpreterId>
+    <InterpreterId>{e6d412c7-6139-4159-a57e-a4f12fa668b9}</InterpreterId>
     <InterpreterVersion>2.7</InterpreterVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -30,58 +30,23 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ADAP_CI_Pro_Ant\templates\bootstrap\nav.py" />
-    <Compile Include="ADAP_CI_Pro_Ant\templates\bootstrap\__init__.py" />
-    <Compile Include="hello.py" />
+    <Compile Include="configure.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="app\forms.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="runserver.py" />
-    <Compile Include="ADAP_CI_Pro_Ant\__init__.py" />
-    <Compile Include="ADAP_CI_Pro_Ant\views.py" />
+    <Compile Include="app\views.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="app\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ADAP_CI_Pro_Ant\" />
-    <Folder Include="ADAP_CI_Pro_Ant\static\" />
-    <Folder Include="ADAP_CI_Pro_Ant\static\css\" />
-    <Folder Include="ADAP_CI_Pro_Ant\static\fonts\" />
-    <Folder Include="ADAP_CI_Pro_Ant\static\img\" />
-    <Folder Include="ADAP_CI_Pro_Ant\static\js\" />
-    <Folder Include="ADAP_CI_Pro_Ant\templates\" />
-    <Folder Include="ADAP_CI_Pro_Ant\templates\bootstrap\" />
-    <Folder Include="ADAP_CI_Pro_Ant\templates\img\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ADAP_CI_Pro_Ant\static\css\bootstrap-theme.css" />
-    <Content Include="ADAP_CI_Pro_Ant\static\css\bootstrap-theme.css.map" />
-    <Content Include="ADAP_CI_Pro_Ant\static\css\bootstrap-theme.min.css" />
-    <Content Include="ADAP_CI_Pro_Ant\static\css\bootstrap.css" />
-    <Content Include="ADAP_CI_Pro_Ant\static\css\bootstrap.css.map" />
-    <Content Include="ADAP_CI_Pro_Ant\static\css\bootstrap.min.css" />
-    <Content Include="ADAP_CI_Pro_Ant\static\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="ADAP_CI_Pro_Ant\static\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="ADAP_CI_Pro_Ant\static\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="ADAP_CI_Pro_Ant\static\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="ADAP_CI_Pro_Ant\static\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="ADAP_CI_Pro_Ant\static\img\favicon.ico" />
-    <Content Include="ADAP_CI_Pro_Ant\static\jquery.js" />
-    <Content Include="ADAP_CI_Pro_Ant\static\jquery.min.js" />
-    <Content Include="ADAP_CI_Pro_Ant\static\jquery.min.map" />
-    <Content Include="ADAP_CI_Pro_Ant\static\js\bootstrap.js" />
-    <Content Include="ADAP_CI_Pro_Ant\static\js\bootstrap.min.js" />
-    <Content Include="ADAP_CI_Pro_Ant\static\js\moment.js" />
-    <Content Include="ADAP_CI_Pro_Ant\static\js\npm.js" />
-    <Content Include="ADAP_CI_Pro_Ant\static\moment.js" />
-    <Content Include="ADAP_CI_Pro_Ant\templates\bootstrap\base.html" />
-    <Content Include="ADAP_CI_Pro_Ant\templates\bootstrap\favicon.ico" />
-    <Content Include="ADAP_CI_Pro_Ant\templates\bootstrap\fixes.html" />
-    <Content Include="ADAP_CI_Pro_Ant\templates\bootstrap\google.html" />
-    <Content Include="ADAP_CI_Pro_Ant\templates\bootstrap\pagination.html" />
-    <Content Include="ADAP_CI_Pro_Ant\templates\bootstrap\utils.html" />
-    <Content Include="ADAP_CI_Pro_Ant\templates\bootstrap\wtf.html" />
-    <Content Include="ADAP_CI_Pro_Ant\templates\img\favicon.ico" />
-    <Content Include="requirements.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Interpreter Include="..\..\..\Scripts\flasky\flasky_env\">
-      <Id>{58ed4c6f-0ee8-4060-a929-2d219585ab39}</Id>
+    <Interpreter Include="..\..\..\flasky\flasky_env\">
+      <Id>{e6d412c7-6139-4159-a57e-a4f12fa668b9}</Id>
       <BaseInterpreter>{2af0f10d-7135-4994-9156-5d01c9c11b7e}</BaseInterpreter>
       <Version>2.7</Version>
       <Description>flasky_env (Python 2.7)</Description>
@@ -91,6 +56,17 @@
       <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
       <Architecture>X86</Architecture>
     </Interpreter>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="app\" />
+    <Folder Include="app\templates\" />
+    <Folder Include="app\static\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\templates\base.html" />
+    <Content Include="app\templates\index.html" />
+    <Content Include="app\templates\login.html" />
+    <Content Include="requirements.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Web.targets" />
   <!-- Specify pre- and post-build commands in the BeforeBuild and 
