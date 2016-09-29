@@ -3,7 +3,9 @@ package com.guava.service;
 
 import com.google.common.util.concurrent.*;
 
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -13,66 +15,33 @@ import java.util.concurrent.TimeUnit;
  */
 public class ManagerService {
     public static ManagerService service = new ManagerService();
-    public static ConcurrentHashMap<String, CommonService> services = new ConcurrentHashMap<>();
     public static ListeningScheduledExecutorService defaultScheduleExecutor;
+    private static Map<String, CustomTimeoutService> services = new ConcurrentHashMap<>();
 
     {
         monitorServices();
     }
 
-    public void registerService(final CommonService nbiService) {
-        if (services.containsKey(nbiService.serviceName())) {
-            System.out.println("[ " + nbiService.serviceName() + " ] exists in service manager " + nbiService.state());
-            return;
-        }
+    public CustomTimeoutService restartService(CustomTimeoutService service) {
+        System.out.println("current services count : " + services.size());
+        CustomTimeoutService backupService = getBackupService(service);
+        System.out.println("They are same ? " + backupService.equals(service));
+        System.out.println("Backup service status is  " + backupService.state());
+        services.putIfAbsent(backupService.serviceName(), backupService);
+        return backupService;
+    }
+
+    public void registerService(final CustomTimeoutService nbiService) {
         System.out.println("----------------------------------------------------");
-        services.put(nbiService.serviceName(), nbiService);
+        services.putIfAbsent(nbiService.serviceName(), nbiService);
         System.out.println(nbiService.serviceName() + " is registered on monitor.");
     }
 
-    public boolean unRegisterService(CommonService scheduleService) {
+    public boolean unRegisterService(CustomTimeoutService scheduleService) {
         if (!services.containsKey(scheduleService.serviceName())) {
             return false;
         }
-        services.remove(scheduleService.serviceName(), scheduleService);
-        return true;
-    }
-
-    public void monitorServices() {
-        defaultScheduleExecutor = initializeDefaultScheduleServicePool();
-        ListenableFuture defaultExecutorFuture = defaultScheduleExecutor.scheduleWithFixedDelay(new Runnable() {
-            @Override
-            public void run() {
-                Iterator<String> keys = services.keySet().iterator();
-                while (keys.hasNext()) {
-                    String key = keys.next();
-                    CommonService nbiService = services.get(key);
-                    if (nbiService.state() == Service.State.TERMINATED || nbiService.state() == Service.State.FAILED) {
-                        unRegisterService(nbiService);
-                        continue;
-                    }
-                    if (nbiService.getTimeout() <= 0 || nbiService.getStartTime() <= 0 ||
-                            nbiService.state() == Service.State.NEW ||
-                            nbiService.state() == Service.State.STOPPING) {
-                        continue;
-                    }
-                    if (nbiService.state() == Service.State.STARTING) {
-                        nbiService.setStartTime(System.currentTimeMillis());
-                        continue;
-                    }
-                    if (System.currentTimeMillis() - nbiService.getStartTime() >= nbiService.getTimeout()) {
-                        nbiService.stopAsync();
-                        unRegisterService(nbiService);
-                        System.out.println("[" + key + "] running timeout for ");
-                        System.out.println("start : " + nbiService.getStartTime());
-                        System.out.println("current time : " + System.currentTimeMillis());
-                        System.out.println("Time out : " + nbiService.getTimeout());
-                    }
-                }
-            }
-        }, 1, 500, TimeUnit.MILLISECONDS);
-
-        monitorDefaultScheduleService(defaultExecutorFuture);
+        return services.remove(scheduleService.serviceName(), scheduleService);
     }
 
     public static ManagerService getInstance() {
@@ -80,6 +49,64 @@ public class ManagerService {
     }
 
     private ManagerService() {
+    }
+
+    private void monitorServices() {
+        defaultScheduleExecutor = initializeDefaultScheduleServicePool();
+        ListenableFuture defaultExecutorFuture = defaultScheduleExecutor.scheduleWithFixedDelay(new Runnable() {
+            @Override
+            public void run() {
+                StringBuilder logInformation = new StringBuilder();
+                Iterator<String> keys = services.keySet().iterator();
+                while (keys.hasNext()) {
+                    String key = keys.next();
+                    CustomTimeoutService nbiService = services.get(key);
+                    if (IsServiceExpired(nbiService)) continue;
+                    if (HasTimeoutConfiguration(nbiService)) continue;
+                    if (IsServiceStarting(nbiService)) continue;
+                    checkServiceTimeout(logInformation, nbiService);
+                }
+                System.out.println(logInformation.toString());
+            }
+        }, 1, 500, TimeUnit.MILLISECONDS);
+
+        monitorDefaultScheduleService(defaultExecutorFuture);
+    }
+
+    private boolean IsServiceStarting(CustomTimeoutService nbiService) {
+        if (nbiService.state() == Service.State.STARTING) {
+            nbiService.setStartTime(System.currentTimeMillis());
+            return true;
+        }
+        return false;
+    }
+
+    private boolean HasTimeoutConfiguration(CustomTimeoutService nbiService) {
+        if (nbiService.getTimeout() <= 0 || nbiService.getStartTime() <= 0 ||
+                nbiService.state() == Service.State.NEW ||
+                nbiService.state() == Service.State.STOPPING) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean IsServiceExpired(CustomTimeoutService nbiService) {
+        if (nbiService.state() == Service.State.TERMINATED || nbiService.state() == Service.State.FAILED) {
+            unRegisterService(nbiService);
+            return true;
+        }
+        return false;
+    }
+
+    private void checkServiceTimeout(StringBuilder logInformation, CustomTimeoutService nbiService) {
+        if (System.currentTimeMillis() - nbiService.getStartTime() >= nbiService.getTimeout()) {
+            nbiService.stopAsync().awaitTerminated();
+            unRegisterService(nbiService);
+            logInformation.append("[" + nbiService.serviceName() + "] running timeout for ");
+            logInformation.append("start : " + nbiService.getStartTime());
+            logInformation.append("current time : " + System.currentTimeMillis());
+            logInformation.append("Time out : " + nbiService.getTimeout());
+        }
     }
 
     private void monitorDefaultScheduleService(ListenableFuture future) {
@@ -96,9 +123,8 @@ public class ManagerService {
         });
     }
 
-    public CommonService restartService(CommonService service) {
-        System.out.println("current services count : " + services.size());
-        CommonService backupService = new CommonScheduleService(service) {
+    private CustomScheduleService getBackupService(final CustomTimeoutService service) {
+        CustomScheduleService backupScheduleService = new CustomScheduleService(service) {
             @Override
             public void runAction() {
                 System.out.println("Backup service is running ... ");
@@ -106,15 +132,44 @@ public class ManagerService {
             }
 
             @Override
-            public Scheduler NBIServiceScheduler() {
-                return service.NBIServiceScheduler();
+            public Scheduler CustomServiceScheduler() {
+                return service.CustomServiceScheduler();
             }
         };
-        System.out.println("They are same ? " + backupService.equals(service));
-        System.out.println("Backup service status is  " + backupService.state());
-        backupService.addListener(getListener(backupService), MoreExecutors.directExecutor());
-        services.put(backupService.serviceName(), backupService);
-        return backupService;
+
+        backupScheduleService.addListener(getBackupServiceListener(service), MoreExecutors.directExecutor());
+        return backupScheduleService;
+    }
+
+    private Service.Listener getBackupServiceListener(final CustomTimeoutService service) {
+        return new Service.Listener() {
+
+            @Override
+            public void starting() {
+                System.out.println(service.serviceName() + " starting ... " + service.state());
+            }
+
+            @Override
+            public void running() {
+                System.out.println(service.serviceName() + " running ... " + service.state());
+            }
+
+            @Override
+            public void stopping(Service.State from) {
+                System.out.println(service.serviceName() + " stopping ... ");
+            }
+
+            @Override
+            public void terminated(Service.State from) {
+                System.out.println(service.serviceName() + " terminated ... ");
+            }
+
+            @Override
+            public void failed(Service.State from, Throwable failure) {
+                System.out.println(service.serviceName() + " failed ... ");
+                failure.printStackTrace();
+            }
+        };
     }
 
     private static ListeningScheduledExecutorService initializeDefaultScheduleServicePool() {
@@ -122,8 +177,24 @@ public class ManagerService {
     }
 
     public static void main(String[] args) {
+
+
+        Map myMap = new HashMap<String, String>();
+        myMap.put("1", "1");
+        myMap.put("2", "1");
+        myMap.put("3", "1");
+        Iterator<String> it = myMap.keySet().iterator();
+        while (it.hasNext()) {
+            String key = it.next();
+            myMap.put("new" + key, "new3");
+            myMap.remove("1");
+            myMap.remove("2");
+//            myMap.remove("3");
+        }
+        System.out.println("HashMap after iterator: " + myMap);
+
         ManagerService service = ManagerService.getInstance();
-        CommonScheduleService scheduleService = getService("schedule-service");
+        CustomScheduleService scheduleService = getService("schedule-service");
         Service.Listener listener = new Service.Listener() {
             @Override
             public void starting() {
@@ -156,7 +227,7 @@ public class ManagerService {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-//                CommonService backupService = service.restartService(scheduleService);
+//                CustomTimeoutService backupService = service.restartService(scheduleService);
 //                backupService.startAsync().awaitRunning();
 //                scheduleService.failureCause();
             }
@@ -168,8 +239,8 @@ public class ManagerService {
 
     }
 
-    public static CommonScheduleService getService(String serviceName) {
-        return new CommonScheduleService(serviceName, 1000 * 4) {
+    public static CustomScheduleService getService(String serviceName) {
+        return new CustomScheduleService(serviceName, 1000 * 4) {
             @Override
             public void runAction() {
                 try {
@@ -182,40 +253,8 @@ public class ManagerService {
             }
 
             @Override
-            public Scheduler NBIServiceScheduler() {
+            public Scheduler CustomServiceScheduler() {
                 return Scheduler.newFixedDelaySchedule(1, 10, TimeUnit.SECONDS);
-            }
-        };
-    }
-
-    public static Service.Listener getListener(CommonService service) {
-        return new Service.Listener() {
-
-            @Override
-            public void starting() {
-                System.out.println(service.serviceName() + " starting ... " + service.state());
-            }
-
-            @Override
-            public void running() {
-                System.out.println(service.serviceName() + " running ... " + service.state());
-            }
-
-            @Override
-            public void stopping(Service.State from) {
-                System.out.println(service.serviceName() + " stopping ... ");
-            }
-
-            @Override
-            public void terminated(Service.State from) {
-                System.out.println(service.serviceName() + " terminated ... ");
-//                System.out.println(service.failureCause().fillInStackTrace());
-            }
-
-            @Override
-            public void failed(Service.State from, Throwable failure) {
-                System.out.println(service.serviceName() + " failed ... ");
-                failure.printStackTrace();
             }
         };
     }

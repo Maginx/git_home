@@ -6,7 +6,7 @@ import com.google.common.util.concurrent.Service;
 /**
  * Created by j69wang on 2016/9/23.
  */
-interface CommonService extends Service {
+interface CustomTimeoutService extends Service {
 
     void setStartTime(long startTime);
 
@@ -20,6 +20,6 @@ interface CommonService extends Service {
     void runAction();
 
     // if you want a schedule service, this function is needed
-    AbstractScheduledService.Scheduler NBIServiceScheduler();
+    AbstractScheduledService.Scheduler CustomServiceScheduler();
 
 }
